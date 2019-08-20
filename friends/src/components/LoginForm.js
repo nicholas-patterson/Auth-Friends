@@ -21,7 +21,7 @@ const LoginForm = props => {
         localStorage.setItem("token", res.data.payload);
       })
       .catch(err => err.response);
-    props.history.push("/");
+    props.history.push("/friendslist");
   };
 
   if (isLoading) {
