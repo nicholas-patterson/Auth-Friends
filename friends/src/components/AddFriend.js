@@ -1,7 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  containedPrimary: {
+    marginTop: "10px"
+  },
+  root: {
+    marginTop: "25px"
+  }
+});
 
 const AddFriend = props => {
+  const classes = useStyles();
   const [newFriend, setNewFriend] = useState({});
 
   const handleChange = e => {
@@ -24,21 +37,27 @@ const AddFriend = props => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input
+        <TextField
+          classes={{ root: classes.root }}
+          fullWidth
           type="text"
           name="name"
           placeholder="name"
           value={newFriend.name}
           onChange={handleChange}
         />
-        <input
+        <TextField
+          classes={{ root: classes.root }}
+          fullWidth
           type="number"
           name="age"
           placeholder="age"
           value={newFriend.age}
           onChange={handleChange}
         />
-        <input
+        <TextField
+          classes={{ root: classes.root }}
+          fullWidth
           type="email"
           name="email"
           placeholder="Email"
@@ -46,7 +65,14 @@ const AddFriend = props => {
           onChange={handleChange}
         />
 
-        <button>Add Friend</button>
+        <Button
+          type="submit"
+          classes={{ containedPrimary: classes.containedPrimary }}
+          variant="contained"
+          color="primary"
+        >
+          Add Friend
+        </Button>
       </form>
     </>
   );

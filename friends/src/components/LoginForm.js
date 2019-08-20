@@ -1,10 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { useTheme } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  containedPrimary: {
+    marginTop: "10px"
+  },
+  root: {
+    marginTop: "25px"
+  }
+});
 
 const LoginForm = props => {
+  const theme = useTheme();
+  const classes = useStyles();
   console.log(props);
   const [user, setUser] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = e => {
     setUser({
@@ -24,28 +38,36 @@ const LoginForm = props => {
     props.history.push("/friendslist");
   };
 
-  if (isLoading) {
-    return <div>Loading....</div>;
-  }
-
+  console.log(theme);
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input
+        <TextField
+          classes={{ root: classes.root }}
+          fullWidth
           type="text"
           name="username"
           placeholder="Enter Username"
           value={user.username}
           onChange={handleChange}
         />
-        <input
+        <TextField
+          classes={{ root: classes.root }}
+          fullWidth
           type="password"
           name="password"
           placeholder="Password"
           value={user.password}
           onChange={handleChange}
         />
-        <button>Submit</button>
+        <Button
+          type="submit"
+          classes={{ containedPrimary: classes.containedPrimary }}
+          variant="contained"
+          color="primary"
+        >
+          Submit
+        </Button>
       </form>
     </>
   );
